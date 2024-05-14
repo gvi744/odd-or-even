@@ -8,6 +8,7 @@ public class Game {
 
   private Integer roundNumber = 0;
   private Integer fingersGiven = 6;
+  private Integer cpuGiven = 0;
   private String playerName;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
@@ -16,8 +17,11 @@ public class Game {
   }
 
   public void play() {
+
+    CPU cpu = new CPU(new RandomStrategy());
     roundNumber++;
     fingersGiven = 6;
+
     MessageCli.START_ROUND.printMessage(Integer.toString(roundNumber));
     MessageCli.ASK_INPUT.printMessage();
     while (fingersGiven < 0 || fingersGiven > 5) {
@@ -28,6 +32,11 @@ public class Game {
       }
     }
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, Integer.toString(fingersGiven));
+
+    cpuGiven = cpu.play();
+    // Get CPU to return number
+
+    MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", Integer.toString(cpuGiven));
   }
 
   public void endGame() {}

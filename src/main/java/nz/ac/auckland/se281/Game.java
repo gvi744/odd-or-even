@@ -8,10 +8,12 @@ public class Game {
 
   private Integer roundNumber = 0;
   private Integer fingersGiven = 6;
+  private String playerName;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
-    roundNumber = 1;
+    this.playerName = options[0];
+    this.roundNumber = 1;
   }
 
   public void play() {
@@ -24,6 +26,7 @@ public class Game {
         MessageCli.INVALID_INPUT.printMessage();
       }
     }
+    MessageCli.PRINT_INFO_HAND.printMessage(playerName, Integer.toString(fingersGiven));
   }
 
   public void endGame() {}

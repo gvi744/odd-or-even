@@ -13,10 +13,11 @@ public class Game {
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
     this.playerName = options[0];
-    this.roundNumber = 1;
   }
 
   public void play() {
+    roundNumber++;
+    fingersGiven = 6;
     MessageCli.START_ROUND.printMessage(Integer.toString(roundNumber));
     MessageCli.ASK_INPUT.printMessage();
     while (fingersGiven < 0 || fingersGiven > 5) {

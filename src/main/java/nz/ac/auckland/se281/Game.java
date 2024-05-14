@@ -31,12 +31,19 @@ public class Game {
         MessageCli.INVALID_INPUT.printMessage();
       }
     }
+
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, Integer.toString(fingersGiven));
-
     cpuGiven = cpu.play();
-    // Get CPU to return number
-
     MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", Integer.toString(cpuGiven));
+
+    // Assume human picked even
+    if (Utils.isEven(cpuGiven + fingersGiven)) {
+      MessageCli.PRINT_OUTCOME_ROUND.printMessage(
+          Integer.toString(cpuGiven + fingersGiven), "EVEN", "HAL-9000");
+    } else {
+      MessageCli.PRINT_OUTCOME_ROUND.printMessage(
+          Integer.toString(cpuGiven + fingersGiven), "ODD", playerName);
+    }
   }
 
   public void endGame() {}

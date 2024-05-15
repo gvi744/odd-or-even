@@ -12,17 +12,19 @@ public class Game {
   private String playerName;
   private Integer humanEven = 0;
   private Integer humanOdd = 0;
+  private DifficultyLevel difficultyLevel;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
     this.playerName = options[0];
+    this.difficultyLevel = DifficultyFactory.chooseDifficulty(difficulty);
   }
 
   public void play() {
 
-    CPU cpu = new CPU(new RandomStrategy());
     roundNumber++;
     fingersGiven = 6;
+    CPU cpu = new CPU(difficultyLevel);
 
     MessageCli.START_ROUND.printMessage(Integer.toString(roundNumber));
     MessageCli.ASK_INPUT.printMessage();

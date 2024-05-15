@@ -1,17 +1,17 @@
 package nz.ac.auckland.se281;
 
 public class CPU {
-  private Strategy strategy;
+  private DifficultyLevel difficultyLevel;
 
-  public CPU(Strategy strategy) {
-    this.strategy = strategy;
+  public CPU(DifficultyLevel difficultyLevel) {
+    this.difficultyLevel = difficultyLevel;
   }
 
-  public void setStrategy(Strategy strategy) {
-    this.strategy = strategy;
+  public void setDifficulty(DifficultyLevel difficultyLevel) {
+    this.difficultyLevel = difficultyLevel;
   }
 
   public Integer play() {
-    return strategy.getFingers();
+    return difficultyLevel.getFingers();
   }
 }

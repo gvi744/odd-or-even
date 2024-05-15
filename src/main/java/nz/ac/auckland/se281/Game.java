@@ -63,6 +63,7 @@ public class Game {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(
             Integer.toString(cpuGiven + fingersGiven), "EVEN", playerName);
         lostLastRound = true;
+        roundsWon++;
       } else {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(
             Integer.toString(cpuGiven + fingersGiven), "ODD", "HAL-9000");
@@ -77,13 +78,24 @@ public class Game {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(
             Integer.toString(cpuGiven + fingersGiven), "ODD", playerName);
         lostLastRound = true;
+        roundsWon++;
       }
     }
 
     roundNumber++;
   }
 
-  public void endGame() {}
+  public void endGame() {
+    if (roundsWon == (roundNumber - roundsWon - 1)) {
+      MessageCli.PRINT_END_GAME_TIE.printMessage();
+    } else if (roundsWon > (roundNumber - roundsWon - 1)) {
+      MessageCli.PRINT_END_GAME.printMessage(playerName);
+    } else if (roundsWon < (roundNumber - roundsWon - 1)) {
+      System.out.println(roundsWon);
+      System.out.println(roundNumber);
+      MessageCli.PRINT_END_GAME.printMessage("HAL-9000");
+    }
+  }
 
   public void showStats() {
     if (roundNumber == 0) {

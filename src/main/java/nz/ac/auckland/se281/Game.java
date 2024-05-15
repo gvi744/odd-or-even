@@ -10,6 +10,8 @@ public class Game {
   private Integer fingersGiven = 6;
   private Integer cpuGiven = 0;
   private String playerName;
+  private Integer humanEven = 0;
+  private Integer humanOdd = 0;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);

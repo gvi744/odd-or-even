@@ -35,13 +35,14 @@ public class CPU {
     if (difficultyLevel instanceof EasyDifficulty) {
       this.strategy = new RandomStrategy();
     } else if (difficultyLevel instanceof MediumDifficulty) {
-      if (roundNumber < 4) {
+      if (roundNumber <= 3) {
         this.strategy = new RandomStrategy();
       } else {
         this.strategy = new TopStrategy(humanEven, humanOdd, choice);
       }
     } else if (difficultyLevel instanceof HardDifficulty) {
-      if (roundNumber < 4) {
+
+      if (roundNumber <= 3) {
         this.strategy = new RandomStrategy();
       } else if (lostLastRound) {
         if (lastStrategy instanceof RandomStrategy) {
@@ -50,8 +51,13 @@ public class CPU {
           this.strategy = new RandomStrategy();
         }
       } else {
-        this.strategy = lastStrategy;
+        if (lastStrategy instanceof RandomStrategy) {
+          this.strategy = new RandomStrategy();
+        } else {
+          this.strategy = new TopStrategy(humanEven, humanOdd, choice);
+        }
       }
+      lastStrategy = this.strategy;
     }
     return strategy.getFingers();
   }

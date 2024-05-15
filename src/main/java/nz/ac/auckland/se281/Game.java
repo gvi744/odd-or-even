@@ -23,9 +23,15 @@ public class Game {
     this.humanEven = 0;
     this.humanOdd = 0;
     this.choice = choice;
+    this.roundNumber = 1;
   }
 
   public void play() {
+
+    if (roundNumber == 0) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
 
     roundNumber++;
     fingersGiven = 6;

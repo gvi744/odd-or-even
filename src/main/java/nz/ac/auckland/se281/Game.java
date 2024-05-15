@@ -86,6 +86,16 @@ public class Game {
   }
 
   public void endGame() {
+
+    if (roundNumber == 0) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
+
+    String roundsLost = Integer.toString(roundNumber - roundsWon - 1);
+    MessageCli.PRINT_PLAYER_WINS.printMessage(playerName, Integer.toString(roundsWon), roundsLost);
+    MessageCli.PRINT_PLAYER_WINS.printMessage("HAL-9000", roundsLost, Integer.toString(roundsWon));
+
     if (roundsWon == (roundNumber - roundsWon - 1)) {
       MessageCli.PRINT_END_GAME_TIE.printMessage();
     } else if (roundsWon > (roundNumber - roundsWon - 1)) {
@@ -95,6 +105,10 @@ public class Game {
       System.out.println(roundNumber);
       MessageCli.PRINT_END_GAME.printMessage("HAL-9000");
     }
+    this.humanEven = 0;
+    this.humanOdd = 0;
+    this.roundNumber = 0;
+    this.roundsWon = 0;
   }
 
   public void showStats() {

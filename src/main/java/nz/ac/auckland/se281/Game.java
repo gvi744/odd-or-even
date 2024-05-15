@@ -15,6 +15,7 @@ public class Game {
   private DifficultyLevel difficultyLevel;
   private Choice choice;
   private Boolean lostLastRound = false;
+  private Integer roundsWon = 0;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
@@ -24,6 +25,7 @@ public class Game {
     this.humanOdd = 0;
     this.choice = choice;
     this.roundNumber = 1;
+    this.roundsWon = 0;
   }
 
   public void play() {
@@ -51,6 +53,7 @@ public class Game {
     } else {
       humanOdd++;
     }
+
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, Integer.toString(fingersGiven));
     cpuGiven = cpu.play();
     MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", Integer.toString(cpuGiven));
@@ -82,5 +85,14 @@ public class Game {
 
   public void endGame() {}
 
-  public void showStats() {}
+  public void showStats() {
+    if (roundNumber == 0) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
+
+    String roundsLost = Integer.toString(roundNumber - roundsWon - 1);
+    MessageCli.PRINT_PLAYER_WINS.printMessage(playerName, Integer.toString(roundsWon), roundsLost);
+    MessageCli.PRINT_PLAYER_WINS.printMessage("HAL-9000", roundsLost, Integer.toString(roundsWon));
+  }
 }

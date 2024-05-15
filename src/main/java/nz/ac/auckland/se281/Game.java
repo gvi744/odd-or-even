@@ -13,18 +13,22 @@ public class Game {
   private Integer humanEven = 0;
   private Integer humanOdd = 0;
   private DifficultyLevel difficultyLevel;
+  private Choice choice;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
     this.playerName = options[0];
     this.difficultyLevel = DifficultyFactory.chooseDifficulty(difficulty);
+    this.humanEven = 0;
+    this.humanOdd = 0;
+    this.choice = choice;
   }
 
   public void play() {
 
     roundNumber++;
     fingersGiven = 6;
-    CPU cpu = new CPU(difficultyLevel);
+    CPU cpu = new CPU(difficultyLevel, roundNumber, humanEven, humanOdd, choice);
 
     MessageCli.START_ROUND.printMessage(Integer.toString(roundNumber));
     MessageCli.ASK_INPUT.printMessage();
@@ -36,17 +40,31 @@ public class Game {
       }
     }
 
+    if (Utils.isEven(fingersGiven)) {
+      humanEven++;
+    } else {
+      humanOdd++;
+    }
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, Integer.toString(fingersGiven));
     cpuGiven = cpu.play();
     MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", Integer.toString(cpuGiven));
 
-    // Assume human picked even
-    if (Utils.isEven(cpuGiven + fingersGiven)) {
-      MessageCli.PRINT_OUTCOME_ROUND.printMessage(
-          Integer.toString(cpuGiven + fingersGiven), "EVEN", "HAL-9000");
-    } else {
-      MessageCli.PRINT_OUTCOME_ROUND.printMessage(
-          Integer.toString(cpuGiven + fingersGiven), "ODD", playerName);
+    if (choice == Main.Choice.EVEN) {
+      if (Utils.isEven(cpuGiven + fingersGiven)) {
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(
+            Integer.toString(cpuGiven + fingersGiven), "EVEN", playerName);
+      } else {
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(
+            Integer.toString(cpuGiven + fingersGiven), "ODD", "HAL-9000");
+      }
+    } else if (choice == Main.Choice.ODD) {
+      if (Utils.isEven(cpuGiven + fingersGiven)) {
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(
+            Integer.toString(cpuGiven + fingersGiven), "EVEN", "HAL-9000");
+      } else {
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(
+            Integer.toString(cpuGiven + fingersGiven), "ODD", playerName);
+      }
     }
   }
 

@@ -14,6 +14,7 @@ public class Game {
   private Integer humanOdd = 0;
   private DifficultyLevel difficultyLevel;
   private Choice choice;
+  private Boolean lostLastRound = false;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
@@ -28,7 +29,7 @@ public class Game {
 
     roundNumber++;
     fingersGiven = 6;
-    CPU cpu = new CPU(difficultyLevel, roundNumber, humanEven, humanOdd, choice);
+    CPU cpu = new CPU(difficultyLevel, roundNumber, humanEven, humanOdd, choice, lostLastRound);
 
     MessageCli.START_ROUND.printMessage(Integer.toString(roundNumber));
     MessageCli.ASK_INPUT.printMessage();
@@ -53,17 +54,21 @@ public class Game {
       if (Utils.isEven(cpuGiven + fingersGiven)) {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(
             Integer.toString(cpuGiven + fingersGiven), "EVEN", playerName);
+        lostLastRound = true;
       } else {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(
             Integer.toString(cpuGiven + fingersGiven), "ODD", "HAL-9000");
+        lostLastRound = false;
       }
     } else if (choice == Main.Choice.ODD) {
       if (Utils.isEven(cpuGiven + fingersGiven)) {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(
             Integer.toString(cpuGiven + fingersGiven), "EVEN", "HAL-9000");
+        lostLastRound = false;
       } else {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(
             Integer.toString(cpuGiven + fingersGiven), "ODD", playerName);
+        lostLastRound = true;
       }
     }
   }

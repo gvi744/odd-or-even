@@ -9,18 +9,22 @@ public class CPU {
   private Integer humanEven;
   private Integer humanOdd;
   private Choice choice;
+  private Boolean lostLastRound;
+  private Strategy lastStrategy;
 
   public CPU(
       DifficultyLevel difficultyLevel,
       Integer roundNumber,
       Integer humanEven,
       Integer humanOdd,
-      Choice choice) {
+      Choice choice,
+      Boolean lostLastRound) {
     this.difficultyLevel = difficultyLevel;
     this.roundNumber = roundNumber;
     this.humanEven = humanEven;
     this.humanOdd = humanOdd;
     this.choice = choice;
+    this.lostLastRound = lostLastRound;
   }
 
   public void setDifficulty(DifficultyLevel difficultyLevel) {
@@ -37,7 +41,17 @@ public class CPU {
         this.strategy = new TopStrategy(humanEven, humanOdd, choice);
       }
     } else if (difficultyLevel instanceof HardDifficulty) {
-      this.strategy = new RandomStrategy();
+      if (roundNumber < 4) {
+        this.strategy = new RandomStrategy();
+      } else if (lostLastRound) {
+        if (lastStrategy instanceof RandomStrategy) {
+          this.strategy = new TopStrategy(humanEven, humanOdd, choice);
+        } else {
+          this.strategy = new RandomStrategy();
+        }
+      } else {
+        this.strategy = lastStrategy;
+      }
     }
     return strategy.getFingers();
   }

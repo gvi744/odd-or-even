@@ -33,7 +33,6 @@ public class Game {
       return;
     }
 
-    roundNumber++;
     fingersGiven = 6;
     CPU cpu = new CPU(difficultyLevel, roundNumber, humanEven, humanOdd, choice, lostLastRound);
 
@@ -77,6 +76,8 @@ public class Game {
         lostLastRound = true;
       }
     }
+
+    roundNumber++;
   }
 
   public void endGame() {}

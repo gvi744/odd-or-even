@@ -4,7 +4,7 @@ import nz.ac.auckland.se281.Main.Choice;
 
 /**
  * Top Strategy takes into account the amount of times the human has played an EVEN or ODD number
- * and predicts accordingly
+ * and predicts accordingly.
  */
 public class TopStrategy implements Strategy {
 
@@ -15,7 +15,7 @@ public class TopStrategy implements Strategy {
 
   /**
    * Updates local instances with information of amount of times human played EVEN or ODD and if
-   * they win with which
+   * they win with which.
    *
    * @param humanEven Amount of times human played EVEN
    * @param humanOdd Amount of times human played ODD

@@ -14,6 +14,14 @@ public class HardDifficulty implements DifficultyLevel {
     this.strategy = strategy;
   }
 
+  /**
+   * @param roundNumber Round Number
+   * @param humanEven Number of times Human picked Even number
+   * @param humanOdd Number of times Human picked Odd number
+   * @param choice Human wins with Even or Odd
+   * @param lostLastRound Ai lost last round?
+   * @param lastStrategy Last Strategy used by Ai
+   */
   public void playHard(
       Integer roundNumber,
       Integer humanEven,

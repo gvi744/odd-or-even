@@ -12,7 +12,7 @@ public class Ai {
   private Strategy lastStrategy;
 
   /**
-   * Updates all necessary instances to be passed onto Strategy to determine Ai number of fingers
+   * Updates all necessary instances to be passed onto Strategy to determine Ai number of fingers.
    *
    * @param difficultyLevel Chosen difficulty by user
    * @param roundNumber Round number to change strategy if higher than 3
@@ -37,7 +37,7 @@ public class Ai {
   }
 
   /**
-   * Ability to manually set the difficulty level of the Ai
+   * Ability to manually set the difficulty level of the Ai.
    *
    * @param difficultyLevel Updates the local difficulty level of Ai
    */
@@ -47,7 +47,7 @@ public class Ai {
 
   /**
    * Ai takes more information depending on how smart it needs to be if Medium or Hard strength, and
-   * returns a number based on custom processing per specification
+   * returns a number based on custom processing per specification.
    *
    * @return Returns the number of fingers Ai has chosen
    */

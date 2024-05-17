@@ -18,6 +18,7 @@ public class TopStrategy implements Strategy {
   @Override
   public Integer getFingers() {
 
+    // Change expected output based on previous encounters with human
     if (humanEven > humanOdd) {
       if (choice == Main.Choice.EVEN) {
         return Utils.getRandomOddNumber();

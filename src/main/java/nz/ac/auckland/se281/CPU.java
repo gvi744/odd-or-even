@@ -31,6 +31,7 @@ public class Cpu {
   }
 
   public Integer play() {
+    // Ai has special processing for MediumDifficulty etc. so casting required
     if (difficultyLevel instanceof MediumDifficulty) {
       ((MediumDifficulty) difficultyLevel).playMedium(roundNumber, humanEven, humanOdd, choice);
     } else if (difficultyLevel instanceof HardDifficulty) {

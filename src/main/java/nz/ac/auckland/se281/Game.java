@@ -18,6 +18,7 @@ public class Game {
   private Integer roundsWon = 0;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
+    // Appends all user input to local instances to be sent for processing
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
     this.playerName = options[0];
     this.difficultyLevel = DifficultyFactory.chooseDifficulty(difficulty);
@@ -30,6 +31,11 @@ public class Game {
 
   public void play() {
 
+    /*
+     * Checks if newgame has been run, then asks for user input (name, fingers, difficulty, ODD/EVEN)
+     * Increments roundNumber, and number of times even or odd has been chosen for Ai
+     * And prints winner after round calculations
+     */
     if (roundNumber == 0) {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
@@ -87,14 +93,8 @@ public class Game {
 
   public void endGame() {
 
-    if (roundNumber == 0) {
-      MessageCli.GAME_NOT_STARTED.printMessage();
-      return;
-    }
-
-    String roundsLost = Integer.toString(roundNumber - roundsWon - 1);
-    MessageCli.PRINT_PLAYER_WINS.printMessage(playerName, Integer.toString(roundsWon), roundsLost);
-    MessageCli.PRINT_PLAYER_WINS.printMessage("HAL-9000", roundsLost, Integer.toString(roundsWon));
+    // Run showStats as described in specification before printing outcome of game
+    this.showStats();
 
     if (roundsWon == (roundNumber - roundsWon - 1)) {
       MessageCli.PRINT_END_GAME_TIE.printMessage();

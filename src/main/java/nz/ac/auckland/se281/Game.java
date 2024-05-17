@@ -36,7 +36,7 @@ public class Game {
     }
 
     fingersGiven = 6;
-    CPU cpu = new CPU(difficultyLevel, roundNumber, humanEven, humanOdd, choice, lostLastRound);
+    Cpu cpu = new Cpu(difficultyLevel, roundNumber, humanEven, humanOdd, choice, lostLastRound);
 
     MessageCli.START_ROUND.printMessage(Integer.toString(roundNumber));
     MessageCli.ASK_INPUT.printMessage();

@@ -4,8 +4,14 @@ import nz.ac.auckland.se281.Main.Difficulty;
 
 public class DifficultyFactory {
 
-  // Simple switch scenario as described in class for choosing correct difficulty by user
+  /**
+   * Simply creates the difficulty level per user input in Game.java
+   *
+   * @param input Chosen enum difficulty
+   * @return Created Difficulty object of strength input
+   */
   public static DifficultyLevel chooseDifficulty(Difficulty input) {
+    // Simple switch scenario as described in class for choosing correct difficulty by user
     switch (input) {
       case EASY:
         return new EasyDifficulty();

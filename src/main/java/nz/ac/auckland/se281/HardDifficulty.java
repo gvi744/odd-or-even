@@ -21,6 +21,10 @@ public class HardDifficulty implements DifficultyLevel {
       Choice choice,
       Boolean lostLastRound,
       Strategy lastStrategy) {
+    /*
+     * If earlier than round 3, use random strategy
+     * Otherwise if lost last round, change strategies between random and top
+     */
     if (roundNumber <= 3) {
       this.strategy = new RandomStrategy();
     } else if (lostLastRound) {

@@ -17,6 +17,14 @@ public class Game {
   private Boolean lostLastRound = false;
   private Integer roundsWon = 0;
 
+  /**
+   * Updates all local instances with user input as well as clearing roundnumber and other necessary
+   * components
+   *
+   * @param difficulty Chosen difficulty of the level to play against
+   * @param choice Want to win with even or odd
+   * @param options User input name
+   */
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // Appends all user input to local instances to be sent for processing
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
@@ -29,13 +37,14 @@ public class Game {
     this.roundsWon = 0;
   }
 
+  /**
+   * Checks if newgame has been run, then asks for user input (name, fingers, difficulty, ODD/EVEN)
+   * Increments roundNumber, and number of times even or odd has been chosen for Ai And prints
+   * winner after round calculations
+   */
   public void play() {
 
-    /*
-     * Checks if newgame has been run, then asks for user input (name, fingers, difficulty, ODD/EVEN)
-     * Increments roundNumber, and number of times even or odd has been chosen for Ai
-     * And prints winner after round calculations
-     */
+    // Plays the game by running all functional processing such as calling StrategyFactory and Ai
     if (roundNumber == 0) {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
@@ -91,6 +100,10 @@ public class Game {
     roundNumber++;
   }
 
+  /**
+   * Ends the game by printing out the stats of who won the most rounds and prints out total winner
+   * by comparing aforementioned stats
+   */
   public void endGame() {
 
     // Run showStats as described in specification before printing outcome of game
@@ -111,6 +124,10 @@ public class Game {
     this.roundsWon = 0;
   }
 
+  /**
+   * Prints to the terminal the statistics of every round so far and associated winners with the
+   * amount of times each person or robot has won
+   */
   public void showStats() {
     if (roundNumber == 0) {
       MessageCli.GAME_NOT_STARTED.printMessage();

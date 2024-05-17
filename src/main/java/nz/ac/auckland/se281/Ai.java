@@ -2,7 +2,7 @@ package nz.ac.auckland.se281;
 
 import nz.ac.auckland.se281.Main.Choice;
 
-public class Cpu {
+public class Ai {
   private DifficultyLevel difficultyLevel;
   private Integer roundNumber;
   private Integer humanEven;
@@ -11,7 +11,7 @@ public class Cpu {
   private Boolean lostLastRound;
   private Strategy lastStrategy;
 
-  public Cpu(
+  public Ai(
       DifficultyLevel difficultyLevel,
       Integer roundNumber,
       Integer humanEven,

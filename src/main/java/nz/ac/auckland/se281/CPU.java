@@ -4,7 +4,6 @@ import nz.ac.auckland.se281.Main.Choice;
 
 public class Cpu {
   private DifficultyLevel difficultyLevel;
-  private Strategy strategy;
   private Integer roundNumber;
   private Integer humanEven;
   private Integer humanOdd;
@@ -32,33 +31,13 @@ public class Cpu {
   }
 
   public Integer play() {
-    if (difficultyLevel instanceof EasyDifficulty) {
-      this.strategy = new RandomStrategy();
-    } else if (difficultyLevel instanceof MediumDifficulty) {
-      if (roundNumber <= 3) {
-        this.strategy = new RandomStrategy();
-      } else {
-        this.strategy = new TopStrategy(humanEven, humanOdd, choice);
-      }
+    if (difficultyLevel instanceof MediumDifficulty) {
+      ((MediumDifficulty) difficultyLevel).playMedium(roundNumber, humanEven, humanOdd, choice);
     } else if (difficultyLevel instanceof HardDifficulty) {
-
-      if (roundNumber <= 3) {
-        this.strategy = new RandomStrategy();
-      } else if (lostLastRound) {
-        if (lastStrategy instanceof RandomStrategy) {
-          this.strategy = new TopStrategy(humanEven, humanOdd, choice);
-        } else {
-          this.strategy = new RandomStrategy();
-        }
-      } else {
-        if (lastStrategy instanceof RandomStrategy) {
-          this.strategy = new RandomStrategy();
-        } else {
-          this.strategy = new TopStrategy(humanEven, humanOdd, choice);
-        }
-      }
-      lastStrategy = this.strategy;
+      ((HardDifficulty) difficultyLevel)
+          .playHard(roundNumber, humanEven, humanOdd, choice, lostLastRound, lastStrategy);
     }
-    return strategy.getFingers();
+
+    return difficultyLevel.getFingers();
   }
 }
